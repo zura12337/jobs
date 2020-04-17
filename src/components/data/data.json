@@ -11,7 +11,8 @@
     "postedAt": "1d ago",
     "contract": "Full Time",
     "location": "USA Only",
-    "languages": ["HTML", "CSS", "JavaScript"]
+    "languages": ["HTML", "CSS", "JavaScript"],
+    "toolsAndLanguages": ["HTML", "CSS", "JavaScript"]
   },
   {
     "id": 2,
@@ -26,7 +27,8 @@
     "contract": "Part Time",
     "location": "Remote",
     "languages": ["Python"],
-    "tools": ["React"]
+    "tools": ["React"],
+    "toolsAndLanguages": ["Python", "React"]
   },
   {
     "id": 3,
@@ -41,7 +43,8 @@
     "contract": "Part Time",
     "location": "USA Only",
     "languages": ["JavaScript"],
-    "tools": ["React", "Sass"]
+    "tools": ["React", "Sass"],
+    "toolsAndLanguages": ["JavaScript", "React", "Sass"]
   },
   {
     "id": 4,
@@ -55,7 +58,8 @@
     "postedAt": "5d ago",
     "contract": "Contract",
     "location": "USA Only",
-    "languages": ["CSS", "JavaScript"]
+    "languages": ["CSS", "JavaScript"],
+    "toolsAndLanguages": ["CSS", "JavaScript"]
   },
   {
     "id": 5,
@@ -70,7 +74,8 @@
     "contract": "Full Time",
     "location": "Worldwide",
     "languages": ["JavaScript"],
-    "tools": ["Ruby", "Sass"]
+    "tools": ["Ruby", "Sass"],
+    "toolsAndLanguages": ["Ruby", "Sass", "JavaScript"]
   },
   {
     "id": 6,
@@ -84,7 +89,8 @@
     "postedAt": "2w ago",
     "contract": "Full Time",
     "location": "UK Only",
-    "tools": ["RoR"]
+    "tools": ["RoR"],
+    "toolsAndLanguages": ["RoR"]
   },
   {
     "id": 7,
@@ -99,7 +105,8 @@
     "contract": "Full Time",
     "location": "Worldwide",
     "languages": ["HTML", "JavaScript"],
-    "tools": ["Sass"]
+    "tools": ["Sass"],
+    "toolsAndLanguages": ["HTML", "Sass", "JavaScript"]
   },
   {
     "id": 8,
@@ -114,7 +121,8 @@
     "contract": "Full Time",
     "location": "USA Only",
     "languages": ["JavaScript"],
-    "tools": ["Vue"," Sass"]
+    "tools": ["Vue"," Sass"],
+    "toolsAndLanguages": ["Vue", "Sass", "JavaScript"]
   },
   {
     "id": 9,
@@ -129,7 +137,8 @@
     "contract": "Full Time",
     "location": "Worldwide",
     "languages": ["JavaScript", "Python"],
-    "tools": ["Django"]
+    "tools": ["Django"],
+    "toolsAndLanguages": ["Python", "Django", "JavaScript"]
   },
   {
     "id": 10,
@@ -144,6 +153,7 @@
     "contract": "Part Time",
     "location": "Worldwide",
     "languages": ["JavaScript"],
-    "tools": ["React", "Sass"]
+    "tools": ["React", "Sass"],
+    "toolsAndLanguages": ["React", "Sass", "JavaScript"]
   }
 ]

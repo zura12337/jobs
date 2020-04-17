@@ -29,10 +29,10 @@ class App extends Component {
     // )))
     /////////////// VERSION 2 ///////////////////
 
-    let data = this.state.data.filter(selected => selected.languages ? selected.languages.includes(option.target.innerText): false)
+    // let data = this.state.data.filter(selected => selected.languages ? selected.languages.includes(option.target.innerText): false)
     
     ///////////// VERSION 3 //////////////////
-    // let data = this.state.data.filter(selected => selected.tools ? selected.tools.includes(option.target.innerText) : false)
+    let data = this.state.data.filter(selected => selected.toolsAndLanguages.includes(option.target.innerText))
     this.setState({data})
    } 
   }
