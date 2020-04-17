@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/job-listing/static/css/main.766413ed.chunk.css",
+    "main.js": "/job-listing/static/js/main.8b494260.chunk.js",
+    "main.js.map": "/job-listing/static/js/main.8b494260.chunk.js.map",
+    "runtime-main.js": "/job-listing/static/js/runtime-main.51e4bfc0.js",
+    "runtime-main.js.map": "/job-listing/static/js/runtime-main.51e4bfc0.js.map",
+    "static/css/2.f42e59c9.chunk.css": "/job-listing/static/css/2.f42e59c9.chunk.css",
+    "static/js/2.0aa98922.chunk.js": "/job-listing/static/js/2.0aa98922.chunk.js",
+    "static/js/2.0aa98922.chunk.js.map": "/job-listing/static/js/2.0aa98922.chunk.js.map",
+    "index.html": "/job-listing/index.html",
+    "precache-manifest.9d07d890588aa8f0cd45bb8ec8552515.js": "/job-listing/precache-manifest.9d07d890588aa8f0cd45bb8ec8552515.js",
+    "service-worker.js": "/job-listing/service-worker.js",
+    "static/css/2.f42e59c9.chunk.css.map": "/job-listing/static/css/2.f42e59c9.chunk.css.map",
+    "static/css/main.766413ed.chunk.css.map": "/job-listing/static/css/main.766413ed.chunk.css.map",
+    "static/js/2.0aa98922.chunk.js.LICENSE.txt": "/job-listing/static/js/2.0aa98922.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/job-listing/static/media/bg-header-desktop.6e2f7196.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.51e4bfc0.js",
+    "static/css/2.f42e59c9.chunk.css",
+    "static/js/2.0aa98922.chunk.js",
+    "static/css/main.766413ed.chunk.css",
+    "static/js/main.8b494260.chunk.js"
+  ]
+}
