@@ -64,6 +64,11 @@ body {
 .none{
   display: none !important;
 }
+#logo{
+  width: 100px;
+  margin-left: -10px;
+  margin-top: -5px;
+}
 /* TYPOGRAPHY */
 .job-main{
   text-align: left;
