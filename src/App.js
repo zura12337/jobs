@@ -1,62 +1,57 @@
 import React, { Component } from 'react';
 import './App.css';
-import Job from './components/job';
-import data from './components/data/data.json';
-import SearchBar from './components/searchBar';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { getJobs } from './services/jobService'; 
+import LoginForm from './components/loginForm';
+import JobsTable from './components/jobsTable';
+import NavBar from './components/navBar';
+import Profile from './components/profile';
+import Logout from './components/logout';
+import Job from './components/getJob';
+import RegisterForm from './components/registerForm';
+import EditProfile from './components/editProfile';
+import createNewJob from './components/createNewJob';
+import ServiceNotAvailable from './components/serviceNotAvailable';
+import NotFound from './components/NotFound';
+import auth from './services/authService';
 
 class App extends Component {
   state = { 
-    selected: [],
-    data: data
+    data: []
    }
-  handleClick = (option) => {
-  if(this.state.selected.includes(option.target.innerText)){
-    toast.error('Cannot add same item 2 times.')
-  }else if(this.state.selected.length >= 5){
-    toast.error('Cannot add more than 5 items.')
-  }else{
-    this.setState({
-      selected: this.state.selected.concat([option.target.innerText])
-    })
 
-
-    //////////////// VESRSION 1 ////////////////////
-    // const data = (this.state.data.map(selected => (
-    //   selected.languages ? console.log(selected.languages.filter(selected.languages == target.innerText)) : ''
-    // )))
-    /////////////// VERSION 2 ///////////////////
-
-    // let data = this.state.data.filter(selected => selected.languages ? selected.languages.includes(option.target.innerText): false)
-    
-    ///////////// VERSION 3 //////////////////
-    let data = this.state.data.filter(selected => selected.toolsAndLanguages.includes(option.target.innerText))
-    this.setState({data})
-   } 
-  }
-  handleDelete = (item) => {
-    const originalSelected = [...this.state.selected];
-    const selected = originalSelected.filter(i => i !== item);
-    this.setState({selected});
-    this.setState({data});
-  }
-  handleClear = () => {
-    const selected = [];
-    this.setState({selected});
-    this.setState({data});
-  }
+   async componentDidMount() {
+     const { data } = await getJobs();
+     this.setState({data})
+     const user = auth.getCurrentUser();
+     this.setState({user});
+   }
   
   render() { 
-    
+    const { data, user } = this.state;
     return (
       <React.Fragment>
+        <NavBar user={user}/>
+        <div className="bg"></div>
         <ToastContainer />
-        <SearchBar items={this.state.selected} onDelete={this.handleDelete} onClear={this.handleClear}/>
-        {this.state.data.map(job => (
-          <Job job={job} key={job.id} onClick={this.handleClick}/>
-        ))}
+        <div className="container">
+          <Switch>
+            <Route path="/register" component={RegisterForm} />
+            <Route path="/login" component={LoginForm} />
+            <Route path="/jobs" render={props => <JobsTable {...props} data={data} user={user}/>} />
+            <Route path="/user" component={Profile} />
+            <Route path="/logout" component={Logout} />
+            <Route path="/edit" component={EditProfile} />
+            <Route path="/service-not-available" component={ServiceNotAvailable} />
+            <Route path="/create-new-job" component={createNewJob} />
+            <Route path="/not-found" component={NotFound}/>
+            <Route path="/:id" component={Job}/>
+            <Redirect from="/" exact to="/jobs" />
+            <Redirect to="/not-found"/>
+          </Switch>
+        </div> 
       </React.Fragment>
     );
   }
