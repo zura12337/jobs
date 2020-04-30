@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/job-listing/static/css/main.836cfa9d.chunk.css",
-    "main.js": "/job-listing/static/js/main.9c0a7a01.chunk.js",
-    "main.js.map": "/job-listing/static/js/main.9c0a7a01.chunk.js.map",
-    "runtime-main.js": "/job-listing/static/js/runtime-main.51e4bfc0.js",
-    "runtime-main.js.map": "/job-listing/static/js/runtime-main.51e4bfc0.js.map",
-    "static/css/2.f42e59c9.chunk.css": "/job-listing/static/css/2.f42e59c9.chunk.css",
-    "static/js/2.04b155d3.chunk.js": "/job-listing/static/js/2.04b155d3.chunk.js",
-    "static/js/2.04b155d3.chunk.js.map": "/job-listing/static/js/2.04b155d3.chunk.js.map",
-    "index.html": "/job-listing/index.html",
-    "precache-manifest.752dd29cece58e027b6907f90c239f9c.js": "/job-listing/precache-manifest.752dd29cece58e027b6907f90c239f9c.js",
-    "service-worker.js": "/job-listing/service-worker.js",
-    "static/css/2.f42e59c9.chunk.css.map": "/job-listing/static/css/2.f42e59c9.chunk.css.map",
-    "static/css/main.836cfa9d.chunk.css.map": "/job-listing/static/css/main.836cfa9d.chunk.css.map",
-    "static/js/2.04b155d3.chunk.js.LICENSE.txt": "/job-listing/static/js/2.04b155d3.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/job-listing/static/media/bg-header-desktop.6e2f7196.svg"
+    "main.css": "/jobs/static/css/main.6f777a33.chunk.css",
+    "main.js": "/jobs/static/js/main.6498225c.chunk.js",
+    "main.js.map": "/jobs/static/js/main.6498225c.chunk.js.map",
+    "runtime-main.js": "/jobs/static/js/runtime-main.041b50c4.js",
+    "runtime-main.js.map": "/jobs/static/js/runtime-main.041b50c4.js.map",
+    "static/css/2.f42e59c9.chunk.css": "/jobs/static/css/2.f42e59c9.chunk.css",
+    "static/js/2.04b155d3.chunk.js": "/jobs/static/js/2.04b155d3.chunk.js",
+    "static/js/2.04b155d3.chunk.js.map": "/jobs/static/js/2.04b155d3.chunk.js.map",
+    "index.html": "/jobs/index.html",
+    "precache-manifest.eb5d6c91247e425061eab38746afb202.js": "/jobs/precache-manifest.eb5d6c91247e425061eab38746afb202.js",
+    "service-worker.js": "/jobs/service-worker.js",
+    "static/css/2.f42e59c9.chunk.css.map": "/jobs/static/css/2.f42e59c9.chunk.css.map",
+    "static/css/main.6f777a33.chunk.css.map": "/jobs/static/css/main.6f777a33.chunk.css.map",
+    "static/js/2.04b155d3.chunk.js.LICENSE.txt": "/jobs/static/js/2.04b155d3.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/jobs/static/media/bg-header-desktop.6e2f7196.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.51e4bfc0.js",
+    "static/js/runtime-main.041b50c4.js",
     "static/css/2.f42e59c9.chunk.css",
     "static/js/2.04b155d3.chunk.js",
-    "static/css/main.836cfa9d.chunk.css",
-    "static/js/main.9c0a7a01.chunk.js"
+    "static/css/main.6f777a33.chunk.css",
+    "static/js/main.6498225c.chunk.js"
   ]
 }
