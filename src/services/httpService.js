@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3900/'
+axios.defaults.baseURL = 'https://static-job-listing-api.herokuapp.com/'
 
 
 function setJwt(jwt) {

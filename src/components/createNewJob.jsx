@@ -116,7 +116,7 @@ class createNewJob extends Component {
         formData.append('file', this.state.data.logo);
 
         try{
-            const res = await axios.post('http://localhost:3900/api/jobs/upload', formData, { 
+            const res = await axios.post('https://static-job-listing-api.herokuapp.com/api/jobs/upload', formData, { 
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
