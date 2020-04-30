@@ -56,7 +56,7 @@ class Form extends Component {
         
 
         try{
-            const res = await axios.post('https://static-job-listing-api.herokuapp.com/users/upload', formData, { 
+            const res = await axios.post('https://joba-api-zura12337.herokuapp.com/users/upload', formData, { 
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
