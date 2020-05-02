@@ -1,6 +1,6 @@
 import http from './httpService';
 
-const apiEndpoint = '/api/jobs';
+const apiEndpoint = '/jobs';
 function jobUrl(id){
     return `${apiEndpoint}/${id}`
 }

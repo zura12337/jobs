@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import Joi from 'joi-browser';
 import Input from './input';
-import axios from 'axios';
 
 class Form extends Component {
     state = {
-        data: { img: '' },
-        errors: { img: '' },
+        data: { },
+        errors: { },
         file: '',
         uploadedFile: {}
     };
@@ -20,17 +19,14 @@ class Form extends Component {
             errors[item.path[0]] = item.message
         return errors
     }
-
     validateProperty = ({ name, value }) => {
         const obj = { [name]: value };
         const schema = { [name]: this.schema[name] }
         const {error} = Joi.validate(obj, schema);
         return error ? error.details[0].message : null
-    
     }
     handleSubmit = e => {
         e.preventDefault()
-
         const errors = this.validate();
         this.setState({ errors: errors || {} });
         if(errors) return;
@@ -39,44 +35,23 @@ class Form extends Component {
     }
     handleChange = ({ currentTarget: input }) => {
         const errors = {...this.state.errors};
-        console.log("HELLO WORLD")
         const data = {...this.state.data};
         data[input.name] = input.value;
         this.setState({ data, errors })
+        console.log(this.state.data);
     }
     onChange = (e) => {
-        this.setState({file :e.target.files[0]});
-        this.setState({filename: e.target.files[0].name})
-    }
+        let files = e.target.files;
+        let reader = new FileReader();
+        reader.readAsDataURL(files[0]);
 
-    onSubmit = async e => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('file', this.state.file);
-        
-
-        try{
-            const res = await axios.post('https://joba-api-zura12337.herokuapp.com/users/upload', formData, { 
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-             });
-            const { fileName, filePath } = res.data;
+        reader.onload=(e)=>{
             const data = {...this.state.data};
-            data['img'] = filePath;
-            this.setState({data});
-            this.setState({uploadedFile: { fileName, filePath }})
-            this.setState({ errors: { img: '' } });
-        }
-        catch(err){
-            if(err.response.status === 500) {
-                console.log('There was a problem with the server')
-            }else{
-                console.log(err.response.data);
-                this.setState({ errors: { img: 'Image Not uploaded.' } })
-            }
+            data['image'] = e.target.result;
+            this.setState({ data });
         }
     }
+
     renderButton(label, className){
         const classN = className + ' btn btn-primary'
         return(
@@ -92,33 +67,26 @@ class Form extends Component {
         return (
             <Input 
                 type={type}
-                onChange={this.handleChange} 
+                onChange={this.handleChange}
                 name={name} 
                 label={label} 
                 value={data[name]} 
                 error={errors[name]}
                 className={className}
             />
-            
         )
     }
     renderUploadImg = () => {
         return (
             <Fragment>
-                <form className="svp" enctype="multipart/form-data">
-                    <div className="custom-file mb-4">
-                        <input type='file' name="img" className="custom-file-input" id="validatedCustomFile" required onChange={this.onChange}  />
-                        <label className="custom-file-label" for="customFile">
-                            {this.state.filename}
-                        </label>
-                        <button onClick={this.onSubmit} id="customFile" className="btn btn-primary btn-block mt-2">Submit</button>
+                    <div className="custom-file  mt-5">
+                        <input type='file' name="img"  id="validatedCustomFile" onChange={this.onChange}  />
                     </div>
-                    {this.state.uploadedFile ? (
-                        <div className='mt-1'>
-                            <img id="uploaded-img" src={this.state.uploadedFile.filePath} alt='' />
+                    {this.state.image ? (
+                        <div className='mt-3'>
+                            <img id="uploaded-img" src={this.state.image} alt='' />
                         </div>
                     ) : null}
-                </form>
                     {this.state.errors.img && <div className="error mt-1">{this.state.errors.img}</div>}
             </Fragment>
         )

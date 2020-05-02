@@ -10,6 +10,7 @@
     "axios": "^0.19.2",
     "countries-api": "^2.0.2",
     "create-react-app": "^3.4.1",
+    "dotenv": "^8.2.0",
     "joi": "^14.3.1",
     "joi-browser": "^13.4.0",
     "jwt-decode": "^2.2.0",
@@ -17,6 +18,8 @@
     "mongoose": "^5.9.10",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-images-upload": "^1.2.8",
+    "react-loading": "^2.0.3",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1"
   },
@@ -24,6 +27,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "build-dev": "dotenv -e .env.development react-app-rewired build",
+    "build-prod": "dotenv -e .env.production react-app-rewired build",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"

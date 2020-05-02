@@ -13,9 +13,13 @@ import Job from './components/getJob';
 import RegisterForm from './components/registerForm';
 import EditProfile from './components/editProfile';
 import createNewJob from './components/createNewJob';
+import UploadImgTest from './components/UploadImgTest';
 import ServiceNotAvailable from './components/serviceNotAvailable';
 import NotFound from './components/NotFound';
 import auth from './services/authService';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 class App extends Component {
   state = { 
@@ -25,7 +29,7 @@ class App extends Component {
    async componentDidMount() {
      const { data } = await getJobs();
      this.setState({data})
-     const user = auth.getCurrentUser();
+     const user = await auth.getUser();
      this.setState({user});
    }
   
@@ -47,6 +51,7 @@ class App extends Component {
             <Route path="/service-not-available" component={ServiceNotAvailable} />
             <Route path="/create-new-job" component={createNewJob} />
             <Route path="/not-found" component={NotFound}/>
+            <Route path="/test" component={UploadImgTest} />
             <Route path="/:id" component={Job}/>
             <Redirect from="/" exact to="/jobs" />
             <Redirect to="/not-found"/>

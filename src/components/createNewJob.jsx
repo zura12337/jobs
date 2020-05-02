@@ -48,10 +48,16 @@ class createNewJob extends Component {
 
 
 
-    onChangeFile = event => {
-        let data = this.state.data;
-        data['logo'] = event.target.files[0];
-        this.setState({ data })
+    onChangeFile = (e) => {
+        let files = e.target.files;
+        let reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+
+        reader.onload=(e)=>{
+            const data = {...this.state.data};
+            data['logo'] = e.target.result;
+            this.setState({ data });
+        }
     }
     handleSelectLanguage = (e) => {
         const language = e.target.innerText;
@@ -77,7 +83,6 @@ class createNewJob extends Component {
     
     onValueChange = (e) => {
         const data = {...this.state.data};
-        const errors = {...this.state.data};
         
         data[e.target.name] = e.target.value;
         const error = this.validate();
@@ -112,30 +117,6 @@ class createNewJob extends Component {
         console.log(this.state.data);
         if (errors) return;
 
-        const formData = new FormData();
-        formData.append('file', this.state.data.logo);
-
-        try{
-            const res = await axios.post('https://joba-api-zura12337.herokuapp.com/api/jobs/upload', formData, { 
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-             });
-            const { fileName, filePath } = res.data;
-            const data = {...this.state.data};
-            data['logo'] = filePath;
-            this.setState({data});
-            this.setState({ errors: { img: '' } });
-        }
-        catch(err){
-            if(err.response.status === 500) {
-                console.log('There was a problem with the server')
-            }else{
-                console.log(err.response.data);
-                this.setState({ errors: { img: 'Image Not uploaded.' } })
-            }
-        }
-
         this.Submit()
     }
     Submit = async () => {
@@ -160,11 +141,14 @@ class createNewJob extends Component {
                     <input type="text" onChange={this.onValueChange} name="position" className="form-control" />
                     {errors.position && <div className="error mt-1">{errors.position}</div>}
                         <label className="col-form-label">Company Logo</label>
-                    <form onSubmit={this.handleSubmit} class="custom-file mt-1">
-                        <input type="file" class="custom-file-input" onChange={this.onChangeFile} name="logo" id="validatedCustomFile" required />
-                        <label class="custom-file-label" for="validatedCustomFile">{data.logo && data.logo.name}</label>
-                        {errors.logo && <div className="error mt-1">{errors.logo}</div>}
-                    </form>
+                    <div className="custom-file  mt-2">
+                        <input type='file' name="img"  id="validatedCustomFile" onChange={this.onChangeFile}  />
+                    </div>
+                    {this.state.image ? (
+                        <div className='mt-3'>
+                            <img id="uploaded-img" src={this.state.image} alt='' />
+                        </div>
+                    ) : null}
                     <label className="col-form-label mt-4">Company</label>
                     <input type="text" onChange={this.onValueChange} name="company" className="form-control"/> 
                     {errors.company && <div className="error mt-1">{errors.company}</div>}

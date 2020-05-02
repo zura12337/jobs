@@ -11,21 +11,21 @@ class LoginForm extends Form {
     }
 
     schema = {
-        username: Joi.string().required().  label('Username'),
-        password: Joi.string().required().label("Password")
+        username: Joi.string().required().min(5).email().label('Username'),
+        password: Joi.string().required().min(5).label("Password")
     };
 
-    doSubmit = async () => {       
+    doSubmit = async() => {       
         try{
             const { username, password } = this.state.data;
             await auth.login(username, password);
-            const { state } = this.props.location 
+            const { state } = this.props.location;
             window.location = state ? state.from.pathname : "/jobs";
         }
         catch(ex){
             if(ex.response && ex.response.status === 400){
                 const errors = { ...this.state.errors };
-                errors.username = ex.response;
+                errors.password = ex.response.data;
                 this.setState({ errors })
             }
         }

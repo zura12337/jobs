@@ -1,8 +1,8 @@
 import http from './httpService';
 
 
-const lanEndpoint = '/api/languages';
-const toolEnpoint = '/api/tools'
+const lanEndpoint = '/languages';
+const toolEnpoint = '/tools'
 
 
 export function getTools() {

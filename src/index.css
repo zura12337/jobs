@@ -353,5 +353,9 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 50px;
-  
+}
+.loading-bars{
+  display: flex;
+  margin-top: 15%;
+  justify-content: center;
 }

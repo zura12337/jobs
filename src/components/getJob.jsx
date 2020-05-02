@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import auth from '../services/authService';
 import { getJob } from '../services/jobService';
-import NotFound from './NotFound';
+import ReactLoading from 'react-loading';
 
 class Job extends Component {
     state = { 
@@ -30,23 +30,27 @@ class Job extends Component {
     render() { 
         const { loading } = this.state;
     
-        if(loading) { 
-            return null;
-        }
+        
         return ( 
             this.state.objectid === true ? (
                 <div className="m-4">
-                    <div className="job-table">
-                        <img src={this.state.data.logo} alt="logo" className="m-2" id="get-job-img"/>
-                        <h1 className="primary-text m-2">{this.state.data.company}</h1>
-                        <p className="sec-text m-2">Position: {this.state.data.position}</p>
-                        <p className="sec-text m-2">Role: {this.state.data.role}</p>
-                        <p className="sec-text m-2">Contract: {this.state.data.contract}</p>
-                        <p className="sec-text m-2 row languages-and-tools">Languages And Tools:{this.state.data.toolsAndLanguages && (
-                        this.state.data.toolsAndLanguages.map(language => (
-                                <p className="badge-main m-2" id="page-badges" onClick={this.handleClick}>{language}</p>
-                        )))} </p>
-                    </div>
+                    {this.state.loading ? (
+                        <div className="loading-bars">
+                            <ReactLoading type={"bars"} color={"black"} />
+                        </div>
+                    ) : (
+                        <div className="job-table">
+                            <img src={this.state.data.logo} alt="logo" className="m-2" id="get-job-img"/>
+                            <h1 className="primary-text m-2">{this.state.data.company}</h1>
+                            <p className="sec-text m-2">Position: {this.state.data.position}</p>
+                            <p className="sec-text m-2">Role: {this.state.data.role}</p>
+                            <p className="sec-text m-2">Contract: {this.state.data.contract}</p>
+                            <p className="sec-text m-2 row languages-and-tools">Languages And Tools:{this.state.data.toolsAndLanguages && (
+                            this.state.data.toolsAndLanguages.map(language => (
+                                    <p className="badge-main m-2" id="page-badges" onClick={this.handleClick}>{language}</p>
+                            )))} </p>
+                        </div>
+                    )}
                 </div>
             ) : window.location = '/not-found'
         

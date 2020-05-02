@@ -7,22 +7,22 @@ import { Redirect  } from 'react-router-dom';
 
 class RegisterForm extends Form {
     state = { 
-        data: { username: '', password: '', name: '', img: '' },
-        errors: {}
+        data: { username: '', password: '', name: '', image: '' },
+        errors: {},
     }
 
     schema = {
         username: Joi.string().required().email().label('Username'),
         password: Joi.string().required().min(5).label("Password"),
-        img: Joi.string().label('Image'),
+        image: Joi.string().label('Image'),
         name: Joi.string().required().label("Name")
     }
+    
 
     doSubmit = async () => {
         try{
-            const response = await userService.register(this.state.data)
-            auth.loginWithJwt(response.headers['x-auth-token']);
-            this.props.history.push('/jobs');
+            await userService.register(this.state.data)
+            this.props.history.push('/login');
         }
         catch(ex){
             if(ex.response){

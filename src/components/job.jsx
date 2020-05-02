@@ -6,7 +6,6 @@ class Job extends Component {
         let badge_featured;
         let language;
         let tool;
-        let job_classes = "job row";
         if (this.props.job.new){
             badge_new = <h5 className="badge new">New!</h5>
         }else{
@@ -14,7 +13,6 @@ class Job extends Component {
         }
         if (this.props.job.featured){
             badge_featured = <h5 className="badge featured">Featured</h5>
-            job_classes = "job row job-featured"
         }else{
             badge_featured = ''
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Input = ({ name, label, error,className ,...rest }) => {
+const Input = ({ name, label, error ,className ,...rest }) => {
     const classes = className + ' form-control'
     return (
         <div className="form-group">
