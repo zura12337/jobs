@@ -42,6 +42,7 @@ export async function editProfile(user){
     const { data } = await http.put(apiEndpoint+'/edit', { 
         name: user.name,
         email: user.email,
+        image: user.image,
         password: user.password
     })
     return data;

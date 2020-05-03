@@ -17,13 +17,15 @@ import UploadImgTest from './components/UploadImgTest';
 import ServiceNotAvailable from './components/serviceNotAvailable';
 import NotFound from './components/NotFound';
 import auth from './services/authService';
-import dotenv from 'dotenv'
+import ReactLoading from 'react-loading';
+import dotenv from 'dotenv';
 
 dotenv.config()
 
 class App extends Component {
   state = { 
-    data: []
+    data: [],
+    loading: true
    }
 
    async componentDidMount() {
@@ -31,32 +33,41 @@ class App extends Component {
      this.setState({data})
      const user = await auth.getUser();
      this.setState({user});
+     this.setState({ loading: false });
    }
   
   render() { 
     const { data, user } = this.state;
     return (
       <React.Fragment>
-        <NavBar user={user}/>
-        <div className="bg"></div>
-        <ToastContainer />
-        <div className="container">
-          <Switch>
-            <Route path="/register" component={RegisterForm} />
-            <Route path="/login" component={LoginForm} />
-            <Route path="/jobs" render={props => <JobsTable {...props} data={data} user={user}/>} />
-            <Route path="/user" component={Profile} />
-            <Route path="/logout" component={Logout} />
-            <Route path="/edit" component={EditProfile} />
-            <Route path="/service-not-available" component={ServiceNotAvailable} />
-            <Route path="/create-new-job" component={createNewJob} />
-            <Route path="/not-found" component={NotFound}/>
-            <Route path="/test" component={UploadImgTest} />
-            <Route path="/:id" component={Job}/>
-            <Redirect from="/" exact to="/jobs" />
-            <Redirect to="/not-found"/>
-          </Switch>
-        </div> 
+        {this.state.loading ? (
+          <div className="loading-bars">
+            <ReactLoading type={"bars"} color={"black"} />
+          </div>
+        ) : (
+          <React.Fragment>
+          <NavBar user={user}/>
+          <div className="bg"></div>
+          <ToastContainer />
+          <div className="container">
+            <Switch>
+              <Route path="/register" component={RegisterForm} />
+              <Route path="/login" component={LoginForm} />
+              <Route path="/jobs" render={props => <JobsTable {...props} data={data} user={user}/>} />
+              <Route path="/user" component={Profile} />
+              <Route path="/logout" component={Logout} />
+              <Route path="/edit" component={EditProfile} />
+              <Route path="/service-not-available" component={ServiceNotAvailable} />
+              <Route path="/create-new-job" component={createNewJob} />
+              <Route path="/not-found" component={NotFound}/>
+              <Route path="/test" component={UploadImgTest} />
+              <Route path="/:id" component={Job}/>
+              <Redirect from="/" exact to="/jobs" />
+              <Redirect to="/not-found"/>
+            </Switch>
+          </div> 
+          </React.Fragment>
+        )}
       </React.Fragment>
     );
   }

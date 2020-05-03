@@ -2,23 +2,26 @@ import React, { Component } from 'react';
 import auth from '../services/authService';
 import Joi from 'joi-browser';
 import { toast } from 'react-toastify';
+import ReactLoading from 'react-loading';
 
 class EditProfile extends Component {
     state = { 
         user: {},
         errors: {},
-        newUser: {}
+        loading: true,
     }
     async componentDidMount() {
-        const user = await auth.getCurrentUser();
+        const user = await auth.getUser();
         const username = user.name;
+        const image = user.image;
         const email = user.email;
-        this.setState({user: { name: username, email }});
+        this.setState({user: { name: username, email, image }});
+        this.setState({ loading: false });
     }
 
     schema = {
         email: Joi.string().required().email().label('Email'),
-        img: Joi.string().label('Image'),
+        image: Joi.string().label('Image'),
         password: Joi.string().label('Password'),
         name: Joi.string().required().label("Name")
     }
@@ -58,7 +61,7 @@ class EditProfile extends Component {
         }
         catch(ex){
             if(ex.response && ex.response.status === 400){
-                toast.error('Password Is Incorect');
+                toast.error('Password Is incorrect')
             }
         }
     }
@@ -66,22 +69,43 @@ class EditProfile extends Component {
 
     onChange = e => {
         const errors = {...this.state.errors};
-
         let newValue = e.target.value;
         const user = {...this.state.user}
         user[e.target.name] = newValue;
         this.setState({ user, errors })
+        console.log(this.state.user);
     }
 
+    onFileChange = (e) => {
+        let files = e.target.files;
+        let reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+        reader.onload=(e)=>{
+            const user = {...this.state.user};
+            user['image'] = e.target.result;
+            this.setState({ user });
+        }
+    }
     render() { 
         return (
             <div className="container mt-5">
+                {this.state.loading ? (
+                    <div className="loading-bars">
+                        <ReactLoading type={"bars"} color={"black"} />
+                    </div>
+                ) : (
+
                 <form onSubmit={this.handleSubmit}>
+                    <label className="mt-2" id="basic-addon1">Image</label>
+                    <br />
+                    <input type="file" name="image" onChange={this.onFileChange} />
+                    <img id="profile-img" src={this.state.user.image} alt="image"/>
+                    <br />
                     <label className="mt-2" id="basic-addon1">Name</label>
                     <input className="form-control" type="text" name="name" onChange={this.onChange} value={this.state.user.name}/>
                     <label className="mt-2" id="basic-addon1">Email</label>
                     <input className="form-control" type="text" name="email" disabled value={this.state.user.email}/>
-                    <button type="button" class="btn btn-primary mt-2" data-toggle="modal" data-target="#exampleModal">
+                    <button type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#exampleModal">
                         Save
                     </button>
                     <div className="modal fade show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -105,6 +129,7 @@ class EditProfile extends Component {
                         </div>
                         </div>
                 </form>
+                )}
             </div>
         );
     }

@@ -6,7 +6,6 @@ import ReactLoading from 'react-loading';
 class Job extends Component {
     state = { 
         data: {},
-        objectid: false,
         loading: true
      }
      async componentDidMount() {
@@ -15,30 +14,38 @@ class Job extends Component {
          let {pathname} = this.props.location;
          pathname = pathname.slice(1);
 
-         if (pathname.match(/^[0-9a-fA-F]{24}$/)) {
-            const { data } = await getJob(pathname);
-            this.setState({data});
-            this.setState({objectid: true})
-        } else {
-            this.setState({objectid: false});
-        }
+        const jobId = this.props.match.params.id;
+        if(jobId === 'new') return;
+        const { data: job } = await getJob(jobId);
+        this.setState({ data: this.mapToViewModel(job) })
         this.setState({ loading: false });
+    }
+    mapToViewModel(job){
+        return {
+            _id: job._id,
+            company: job.company,
+            role: job.role,
+            contract: job.contract,
+            level: job.level,
+            logo: job.logo,
+            position: job.position,
+            toolsAndLanguages: job.toolsAndLanguages
+        }
     }
     handleClick = () => {
         this.props.history.replace('/jobs');
     }
     render() { 
-        const { loading } = this.state;
+        const { loading, objectid } = this.state;
     
         
         return ( 
-            this.state.objectid === true ? (
-                <div className="m-4">
-                    {this.state.loading ? (
-                        <div className="loading-bars">
-                            <ReactLoading type={"bars"} color={"black"} />
-                        </div>
-                    ) : (
+            loading ? (
+                <div className="loading-bars">
+                    <ReactLoading type={"bars"} color={"black"} />
+                </div>
+            ) : (
+                    <div className="m-4">
                         <div className="job-table">
                             <img src={this.state.data.logo} alt="logo" className="m-2" id="get-job-img"/>
                             <h1 className="primary-text m-2">{this.state.data.company}</h1>
@@ -50,13 +57,10 @@ class Job extends Component {
                                     <p className="badge-main m-2" id="page-badges" onClick={this.handleClick}>{language}</p>
                             )))} </p>
                         </div>
-                    )}
-                </div>
-            ) : window.location = '/not-found'
-        
-            
-         );
-    }
+                    </div>
+                    
+            ))
+                    }
 }
  
 export default Job;
